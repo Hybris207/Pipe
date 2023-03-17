@@ -35,3 +35,4 @@ int	parcing(int argc, char **argv, char **env, t_data *data)
 	make_instruction_line(argc, data);
 	return (1);
 }
+
