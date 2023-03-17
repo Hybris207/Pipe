@@ -16,24 +16,31 @@ t_command	make_command(char *str, t_data *data)
 {
 	t_command	res;
 	char		**command;
-	char		*path;
 
-	path = NULL;
 	command = ft_split(str, ' ');
 	res.command = command;
 	if (res.command && res.command[0])
-		find_command_in_path(res.command[0], data, &path);
+		find_command_in_path(res.command[0], data, &(res.path));
 	return (res);
 }
 
-t_command	empty_command(char *str)
+t_command	empty_command()
 {
 	t_command	res;
 
 	res.command = malloc(sizeof(char *));
-	res.command[0] = str;
+	res.command = NULL;
 	res.path = NULL;
 	return (res);
+}
+
+void swap_first_param(t_data *data)
+{
+	t_command	tmp;
+
+	tmp = data->command_line[0];
+	data->command_line[0] = data->command_line[1];
+	data->command_line[1] = tmp;
 }
 
 int	make_command_line(int argc, char **argv, t_data *data)
@@ -41,15 +48,18 @@ int	make_command_line(int argc, char **argv, t_data *data)
 	int	i;
 	int	j;
 
-	i = 2;
-	j = 1;
+	i = 1;
+	j = 0;
 	data->command_line = malloc(sizeof(t_command) * (argc));
-	data->command_line[0] = empty_command(argv[1]);
-	while (i < argc - 1)
+	while (i < argc)
 	{
-		data->command_line[j++] = make_command(argv[i++], data);
+		data->command_line[j] = make_command(argv[i], data);
+		j++;
+		i++;
 	}
-	data->command_line[j] = empty_command(argv[argc - 1]);
-	data->command_line[j + 1] = empty_command(NULL);
+	j--;
+	data->command_line[j].path = data->command_line[j].command[0];
+	data->command_line[0].path = data->command_line[0].command[0];
+	swap_first_param(data);
 	return (0);
 }

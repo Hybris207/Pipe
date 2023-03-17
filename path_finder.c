@@ -17,7 +17,7 @@ int		path_exist(t_data *data)
 	int i;
 
 	i = 0;
-	while (data->env[i])
+	while (data->env && data->env[i])
 	{
 		if (ft_strncmp(data->env[i], "PATH", 5) == '=')
 			return (i);
@@ -57,7 +57,7 @@ int which_path(char	**command_path, char **all_path, char *str)
 		if (!(*command_path))
 			return (2);
 		if (access(*command_path, F_OK) == 0)
-			return (i);
+			return (1);
 		free(*command_path);
 		i++;
 	}
