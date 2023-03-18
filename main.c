@@ -6,24 +6,15 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:01:28 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 19:23:05 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:54:12 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-void printtab(char **strings) {
-    int i;
-    
-    i = 0;
-    while (strings[i] != NULL)
-    {
-        printf("%s\n", strings[i]);
-        i++;
-    }
-}
-
-void    setup(t_data *all)
+void	setup(t_data *all)
 {
 	all->actual_path = NULL;
 	all->num_command = 0;
@@ -40,6 +31,23 @@ void    setup(t_data *all)
 	all->fd_heredoc = NULL;
 }
 
+void	free_all(t_data *data, int argc)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc - 1)
+	{
+		if (data->command_line[i].command)
+			ft_free_dbchar_tab(data->command_line[i].command, 0);
+		if (data->command_line[i].path != NULL)
+			free(data->command_line[i].path);
+		i++;
+	}
+	free(data->command_line);
+	ft_free_dbchar_tab(data->instructions, 0);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
@@ -49,5 +57,6 @@ int	main(int argc, char **argv, char **env)
 		return (ft_putstr_fd("Invalid Arguments\n", 2), 1);
 	if (!parcing(argc, argv, env, &data))
 		return (1);
-    what_do(&data);
+	what_do(&data);
+	free_all(&data, argc);
 }

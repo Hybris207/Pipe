@@ -6,11 +6,12 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:44:50 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/18 15:17:38 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:37:51 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdlib.h>
 
 int		path_exist(t_data *data)
 {

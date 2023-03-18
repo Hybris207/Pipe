@@ -6,7 +6,7 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:38:33 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/18 16:10:17 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:54:42 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,13 @@ t_command	make_command(char *str, t_data *data)
 	res.path = NULL;
 	command = ft_split(str, ' ');
 	pathl = how_many_child(command[0]);
-	if (!change_path_value(&pathl, command, &new_split, &(command[0])))
+	if (!change_path_value(&pathl, command, &new_split, &(res.path)))
 		return (res);
 	res.command = command;
 	if (res.command && res.command[0] && !res.path)
 		find_command_in_path(res.command[0], data, &(res.path));
-	printf("%s \n", res.path);
+	if (!res.path)
+		res.path = command[0];
 	return (res);
 }
 
@@ -126,17 +127,10 @@ int	make_command_line(int argc, char **argv, t_data *data)
 	i = 1;
 	j = 0;
 	data->command_line = malloc(sizeof(t_command) * (argc));
-	data->command_line[argc - 1].path = NULL;
-	data->command_line[0].path = NULL;
 	while (i < argc)
-	{
-		data->command_line[j] = make_command(argv[i], data);
-		j++;
-		i++;
-	}
+		data->command_line[j++] = make_command(argv[i++], data);
 	j--;
-	data->command_line[j].path = data->command_line[j].command[0];
-	data->command_line[0].path = data->command_line[0].command[0];
+	need_creat_file(data->command_line[j].path);
 	swap_first_param(data);
 	return (0);
 }

@@ -98,7 +98,7 @@ int	alpha_fork(t_data *all, t_command *tCommand)
 		return (tmp);
 	i = 0;
 	tmp = child_process(all, tCommand, &pid_pipes, i);
-	if (tmp != -5)
+	if (tmp != -1)
 		return (tmp);
 	end_fork(all, all_pid, all_pipes);
 	return (1);
