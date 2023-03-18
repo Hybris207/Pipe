@@ -6,7 +6,7 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:44:50 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 14:50:21 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:17:38 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,53 +38,73 @@ char    *path_value(char **env)
     return (path);
 }
 
-int which_path(char	**command_path, char **all_path, char *str)
+static int	creat_path_name(char *str, char **all_path, int i, char **cmd_path)
 {
-	char 	*tmp;
-	char 	*tmp2;
-	int		i;
+	char	*tmp;
+	char	*tmp2;
 
-	i = 0;
-	while(all_path && all_path[i])
+	tmp = ft_strjoin("/", str);
+	if (!tmp)
+		return (2);
+	tmp2 = ft_strjoin(all_path[i], tmp);
+	if (!tmp2)
+		return (free(tmp), 2);
+	*cmd_path = ft_strdup(tmp2);
+	free(tmp2);
+	free(tmp);
+	if (!(*cmd_path))
+		return (2);
+	return (1);
+}
+
+static int	check_path_exist(t_data *all, char **path, char ***all_path)
+{
+	*path = path_value(all->env);
+	if (!(*path))
+		return (0);
+	*all_path = ft_split(*path, ':');
+	if (!(*all_path))
+		return (free(*path), 0);
+	free(*path);
+	return (1);
+}
+
+static int	which_path(char	**command_path, int *i, char **all_path, char *str)
+{
+	while (all_path && all_path[*i])
 	{
-		tmp = ft_strjoin("/", str);
-		tmp2 = ft_strjoin(all_path[i], tmp);
-		if (!tmp2)
-			return (free(tmp), 0);
-		*command_path = ft_strdup(tmp2);
-		free(tmp2);
-		free(tmp);
-		if (!(*command_path))
+		if (creat_path_name(str, all_path, *i, command_path) == 2)
 			return (2);
 		if (access(*command_path, F_OK) == 0)
-			return (1);
+			return (ft_free_dbchar_tab(all_path, 0), 1);
 		free(*command_path);
-		i++;
+		(*i)++;
 	}
 	return (0);
 }
 
-int	find_command_in_path(char *str, t_data *data, char **path_to_command)
+int	find_command_in_path(char *str, t_data *all, char **path_to_command)
 {
-    char	*path;
-    char	**all_path;
-    char	*command_path;
+	int		i;
+	char	*path;
+	char	**all_path;
+	char	*command_path;
+	int		check;
 
+	i = 0;
 	all_path = NULL;
-    if (path_exist(data) != -1)
+	if (!check_path_exist(all, &path, &all_path))
+		return (0);
+	check = which_path(&command_path, &i, all_path, str);
+	if (check == 1)
 	{
-		path = path_value(data->env);
-		all_path = ft_split(path, ':');
-		free(path);
-		if (!all_path)
-			return (free(all_path), 0);
-		if (which_path(&command_path, all_path, str) == 1)
-		{
-			*path_to_command = command_path;
-			return (ft_free_dbchar_tab(all_path, 0), 1);
-		}
-		ft_free_dbchar_tab(all_path, 0);
+		*path_to_command = command_path;
+		return (1);
 	}
+	else if (check == 2)
+		return (0);
+	if (all_path)
+		ft_free_dbchar_tab(all_path, 0);
 	*path_to_command = NULL;
-    return (1);
+	return (1);
 }

@@ -6,11 +6,12 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:38:33 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 15:05:45 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:10:17 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdio.h>
 
 int	how_many_child(char *path)
 {
@@ -57,15 +58,22 @@ t_command	make_command(char *str, t_data *data)
 {
 	t_command	res;
 	char		**command;
+	char		**new_split;
+	int			pathl;
 
+	res.path = NULL;
 	command = ft_split(str, ' ');
+	pathl = how_many_child(command[0]);
+	if (!change_path_value(&pathl, command, &new_split, &(command[0])))
+		return (res);
 	res.command = command;
-	if (res.command && res.command[0])
+	if (res.command && res.command[0] && !res.path)
 		find_command_in_path(res.command[0], data, &(res.path));
+	printf("%s \n", res.path);
 	return (res);
 }
 
-t_command	empty_command()
+t_command	empty_command(void)
 {
 	t_command	res;
 
@@ -101,7 +109,6 @@ void	need_creat_file(char *folder_name)
 
 int	check_file_output(int i, int j, char **split, t_command *command_line)
 {
-	change_path_value()
 	need_creat_file(split[i]);
 	if (command_line[j].path)
 		free(command_line[j].path);

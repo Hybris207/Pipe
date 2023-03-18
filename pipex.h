@@ -6,7 +6,7 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:53:45 by gde               #+#    #+#             */
-/*   Updated: 2023/03/17 19:40:00 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:56:38 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ int			is_redirection_after_pipe(t_data *all, t_command *tCommand, int *i);
 int 		have_input_redirection(t_data *all, t_command *tCommand, int *i);
 void		skip_output_redirect(t_data *all, t_command *tCommand, int *i);
 int			**creat_all_pipe(t_data *all);
+void		need_creat_file(char *folder_name);
 
 #endif
