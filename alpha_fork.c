@@ -60,7 +60,6 @@ static int	child_process(t_data *all, t_command *tCommand, t_forking *pip, int i
 {
 	int tmp;
 
-	tmp = 0;
 	while (i < (count_pipe(all) + 1))
 	{
 		pip->all_pid[i] = fork();
@@ -71,9 +70,9 @@ static int	child_process(t_data *all, t_command *tCommand, t_forking *pip, int i
 			close_unused_fd(all, pip->all_pipes, i);
 			tmp = check_is_any_redirection(all, tCommand, i, pip->all_pipes);
 			if (tmp == -1)
-				return (free(pip->all_pid), 0);
+				return (free(pip->all_pid), free_pipes(count_pipe(all), pip->all_pipes), 0);
 			if (is_other_pipe(i, pip->all_pipes, all, pip->all_pid) == 0)
-				return (0);
+				return (free(pip->all_pid), free_pipes(count_pipe(all), pip->all_pipes), 0);
 			tmp = ft_terminal_command(tCommand[all->num_command - tmp], all);
 			return (free_pipes(count_pipe(all), pip->all_pipes),
 					free(pip->all_pid), tmp);
@@ -98,7 +97,7 @@ int	alpha_fork(t_data *all, t_command *tCommand)
 		return (tmp);
 	i = 0;
 	tmp = child_process(all, tCommand, &pid_pipes, i);
-	if (tmp != -1)
+	if (tmp != -5)
 		return (tmp);
 	end_fork(all, all_pid, all_pipes);
 	return (1);

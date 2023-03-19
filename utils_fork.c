@@ -64,7 +64,7 @@ int	alloc_pipes_pid(int **all_pid, int ***all_pipes, t_data *all)
 		return (0);
 	(*all_pid) = malloc((count_pipe(all) + 1) * sizeof(int));
 	if (!(*all_pid))
-		return (free_pipes(count_pipe(all), *all_pipes), 0);
+		return (0);
 	return (1);
 }
 

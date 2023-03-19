@@ -40,7 +40,8 @@ void	free_all(t_data *data, int argc)
 	{
 		if (data->command_line[i].command)
 			ft_free_dbchar_tab(data->command_line[i].command, 0);
-		ft_putstr_fd(data->command_line[i].path, 1);
+		if (data->command_line[i].path)
+			free(data->command_line[i].path);
 		i++;
 	}
 	free(data->command_line);

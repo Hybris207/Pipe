@@ -71,7 +71,7 @@ t_command	make_command(char *str, t_data *data)
 	if (res.command && res.command[0] && !res.path)
 		find_command_in_path(res.command[0], data, &(res.path));
 	if (!res.path)
-		res.path = command[0];
+		res.path = ft_strdup(command[0]);
 	return (res);
 }
 
