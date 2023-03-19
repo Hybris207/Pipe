@@ -55,7 +55,7 @@ int	change_path_value(int *pathl, char **split, char ***new_split, char **pthtc)
 	return (1);
 }
 
-t_command	make_command(char *str, t_data *data)
+t_command	make_command(char *str, t_data *data, int yes)
 {
 	t_command	res;
 	char		**command;
@@ -68,9 +68,9 @@ t_command	make_command(char *str, t_data *data)
 	if (!change_path_value(&pathl, command, &new_split, &(res.path)))
 		return (res);
 	res.command = command;
-	if (res.command && res.command[0] && !res.path)
+	if (res.command && res.command[0] && !res.path && yes == 0)
 		find_command_in_path(res.command[0], data, &(res.path));
-	if (!res.path)
+	else if (!res.path)
 		res.path = ft_strdup(command[0]);
 	return (res);
 }
@@ -124,14 +124,22 @@ int	make_command_line(int argc, char **argv, t_data *data)
 {
 	int	i;
 	int	j;
+	int yes;
 
 	i = 1;
 	j = 0;
+	yes = 0;
 	data->command_line = malloc(sizeof(t_command) * (argc));
 	while (i < argc)
-		data->command_line[j++] = make_command(argv[i++], data);
+	{
+		if (i == 1 || i == argc - 1)
+			yes = 1;
+		else
+			yes = 0;
+		data->command_line[j++] = make_command(argv[i++], data, yes);
+	}
 	j--;
 	need_creat_file(data->command_line[j].path);
 	swap_first_param(data);
-	return (0);
+	return (1);
 }

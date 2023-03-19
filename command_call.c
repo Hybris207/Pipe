@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-int check_permission_access(char *folder_path, char *folder_name)
+int check_permission_access2(char *folder_path, char *folder_name)
 {
 	struct stat sb;
 	if (access(folder_name, F_OK) == 0)
@@ -67,7 +67,7 @@ int	ft_terminal_command(t_command com, t_data *all)
 		write(2, ": command not found\n", 20);
 		return (127);
 	}
-	if (!check_permission_access(ft_get_parent(com.path), com.path))
+	if (!check_permission_access2(ft_get_parent(com.path), com.path))
 		return (1);
 	execve(com.path, com.command, all->env);
 	return (0);

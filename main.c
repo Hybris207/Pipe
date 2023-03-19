@@ -56,7 +56,8 @@ int	main(int argc, char **argv, char **env)
 	if (argc < 5)
 		return (ft_putstr_fd("Invalid Arguments\n", 2), 1);
 	if (!parcing(argc, argv, env, &data))
-		return (1);
+		return (free_all(&data, argc), 1);
 	what_do(&data);
 	free_all(&data, argc);
+	return (0);
 }

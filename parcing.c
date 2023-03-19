@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	make_instruction_line(int argc, t_data *data)
+int	make_instruction_line(int argc, t_data *data)
 {
 	int	i;
 
@@ -26,13 +26,18 @@ void	make_instruction_line(int argc, t_data *data)
 	}
 	data->instructions[i] = ft_strdup(">");
 	data->instructions[i + 1] = NULL;
+	return (1);
 }
 
 int	parcing(int argc, char **argv, char **env, t_data *data)
 {
 	data->env = env;
-	make_command_line(argc, argv, data);
-	make_instruction_line(argc, data);
+	if (!make_command_line(argc, argv, data))
+		return (0);
+	if (!make_instruction_line(argc, data))
+		return (0);
+	if (!check_logic_input(data, argc))
+		return (0);
 	return (1);
 }
 

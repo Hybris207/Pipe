@@ -109,5 +109,6 @@ int 		have_input_redirection(t_data *all, t_command *tCommand, int *i);
 void		skip_output_redirect(t_data *all, t_command *tCommand, int *i);
 int			**creat_all_pipe(t_data *all);
 void		need_creat_file(char *folder_name);
+int 		check_logic_input(t_data *data, int argc);
 
 #endif
