@@ -6,7 +6,7 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:01:28 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/18 17:54:12 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:46:05 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void	free_all(t_data *data, int argc)
 	{
 		if (data->command_line[i].command)
 			ft_free_dbchar_tab(data->command_line[i].command, 0);
-		if (data->command_line[i].path != NULL)
-			free(data->command_line[i].path);
+		ft_putstr_fd(data->command_line[i].path, 1);
 		i++;
 	}
 	free(data->command_line);

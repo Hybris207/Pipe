@@ -6,10 +6,11 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:38:33 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/18 16:54:42 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:50:23 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libftt/libft.h"
 #include "pipex.h"
 #include <stdio.h>
 

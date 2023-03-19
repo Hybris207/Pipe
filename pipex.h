@@ -6,7 +6,7 @@
 /*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:53:45 by gde               #+#    #+#             */
-/*   Updated: 2023/03/18 15:56:38 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:40:29 by gde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void		close_unused_fd(t_data *all, int **all_pipes, int i);
 void		free_pipes(int len, int **all_pipes);
 int			count_pipe(t_data *all);
 int			count_pipe(t_data *all);
-void		free_pipes(int len, int **all_pipes);
 
 
 // Utils
