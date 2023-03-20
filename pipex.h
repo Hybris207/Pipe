@@ -6,7 +6,7 @@
 /*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:53:45 by gde               #+#    #+#             */
-/*   Updated: 2023/03/20 11:29:28 by etanguy          ###   ########.fr       */
+/*   Updated: 2023/03/20 13:33:23 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,9 @@ void		skip_output_redirect(t_data *all, t_command *tCommand, int *i);
 int			**creat_all_pipe(t_data *all);
 void		need_creat_file(char *folder_name);
 int			check_logic_input(t_data *data, int argc);
+t_command	empty_command(void);
+int			change_path_value(int *pathl, char **split, char ***ns, char **p);
+int			how_many_child(char *path);
+int			path_exist(t_data *data);
 
 #endif

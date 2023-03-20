@@ -6,26 +6,12 @@
 /*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:44:50 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/20 11:37:56 by etanguy          ###   ########.fr       */
+/*   Updated: 2023/03/20 13:39:28 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <stdlib.h>
-
-int	path_exist(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->env && data->env[i])
-	{
-		if (ft_strncmp(data->env[i], "PATH", 5) == '=')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 char	*path_value(char **env)
 {

@@ -6,7 +6,7 @@ LIBFT		=	 libftt/ft_atoi.c libftt/ft_bzero.c libftt/ft_calloc.c libftt/ft_isalnu
                  libftt/ft_strnstr.c libftt/ft_strtrim.c libftt/ft_substr.c libftt/ft_tolower.c libftt/ft_toupper.c libftt/ft_strcmp.c
 
 SRCS		=	main.c parcing.c pipes_utils.c command_line.c path_finder.c utils.c execution.c alpha_fork.c command_call.c redirection_alpha_fork.c utils_fork.c \
-				check_everythings_is_okay.c
+				check_everythings_is_okay.c command_line_helper.c
 
 OBJS		=	${SRCS:.c=.o} ${LIBFT:.c=.o}
 
