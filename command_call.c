@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   command_call.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:26:56 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 19:32:08 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:33:31 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int check_permission_access2(char *folder_path, char *folder_name)
+int	check_permission_access2(char *folder_path, char *folder_name)
 {
-	struct stat sb;
+	struct stat	sb;
+
 	if (access(folder_name, F_OK) == 0)
 	{
 		stat(folder_name, &sb);
 		if (!((sb.st_mode & S_IFMT) == S_IFDIR))
 		{
-			if ((!folder_path || (folder_path && access(folder_path, X_OK) == 0)) &&
-				access(folder_name, X_OK) == 0)
+			if ((!folder_path || (folder_path
+						&& access(folder_path, X_OK) == 0))
+				&& access(folder_name, X_OK) == 0)
 				return (free(folder_path), 1);
 			else
 				ft_putstr_fd("Permission denied", 2);
 		}
 		else
 			ft_putstr_fd("Permission denied", 2);
-
 	}
 	else
 		ft_putstr_fd("Permission denied", 2);

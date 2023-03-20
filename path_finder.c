@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   path_finder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:44:50 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/18 17:37:51 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:37:56 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <stdlib.h>
 
-int		path_exist(t_data *data)
+int	path_exist(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data->env && data->env[i])
@@ -27,16 +27,16 @@ int		path_exist(t_data *data)
 	return (-1);
 }
 
-char    *path_value(char **env)
+char	*path_value(char **env)
 {
-    int        i;
-    char    *path;
+	int		i;
+	char	*path;
 
-    i = 0;
-    while (ft_strncmp(env[i], "PATH", 4) != 0)
-        i++;
-    path = ft_strdup(env[i] + 5);
-    return (path);
+	i = 0;
+	while (ft_strncmp(env[i], "PATH", 4) != 0)
+		i++;
+	path = ft_strdup(env[i] + 5);
+	return (path);
 }
 
 static int	creat_path_name(char *str, char **all_path, int i, char **cmd_path)

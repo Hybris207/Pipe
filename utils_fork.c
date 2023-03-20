@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_fork.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:29:54 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 19:38:56 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:36:49 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	count_pipe(t_data *all)
 
 	i = 0;
 	res = 0;
-	while(all->instructions && all->instructions[i])
+	while (all->instructions && all->instructions[i])
 	{
 		if (ft_strcmp(all->instructions[i], "|"))
 			res++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:33:06 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 14:33:48 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:35:30 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ int	parcing(int argc, char **argv, char **env, t_data *data)
 		return (0);
 	return (1);
 }
-

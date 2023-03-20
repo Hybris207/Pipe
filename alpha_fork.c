@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   alpha_fork.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/20 11:30:50 by etanguy           #+#    #+#             */
+/*   Updated: 2023/03/20 11:38:15 by etanguy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	end_fork(t_data *all, int *all_pid, int **all_pipes)
@@ -26,8 +38,8 @@ void	end_fork(t_data *all, int *all_pid, int **all_pipes)
 void	value_incremantation(t_data *all, int *i)
 {
 	while (all->instructions[all->num_of_opperation]
-		   && (ft_strcmp(all->instructions[all->num_of_opperation], "<")
-			   || ft_strcmp(all->instructions[all->num_of_opperation], "<<")))
+		&& (ft_strcmp(all->instructions[all->num_of_opperation], "<")
+			|| ft_strcmp(all->instructions[all->num_of_opperation], "<<")))
 	{
 		if (ft_strcmp(all->instructions[all->num_of_opperation], "<<"))
 		{
@@ -38,8 +50,8 @@ void	value_incremantation(t_data *all, int *i)
 		all->num_command++;
 	}
 	while (all->instructions[all->num_of_opperation]
-		   && (ft_strcmp(all->instructions[all->num_of_opperation], ">")
-			   || ft_strcmp(all->instructions[all->num_of_opperation], ">>")))
+		&& (ft_strcmp(all->instructions[all->num_of_opperation], ">")
+			|| ft_strcmp(all->instructions[all->num_of_opperation], ">>")))
 	{
 		all->num_of_opperation++;
 		all->num_command++;
@@ -56,9 +68,9 @@ static int	return_start_value(t_data *all, int ***api, int **aid)
 	return (2);
 }
 
-static int	child_process(t_data *all, t_command *tCommand, t_forking *pip, int i)
+static int	child_process(t_data *all, t_command *tcmd, t_forking *pip, int i)
 {
-	int tmp;
+	int	tmp;
 
 	while (i < (count_pipe(all) + 1))
 	{
@@ -68,14 +80,16 @@ static int	child_process(t_data *all, t_command *tCommand, t_forking *pip, int i
 		if (pip->all_pid[i] == 0)
 		{
 			close_unused_fd(all, pip->all_pipes, i);
-			tmp = check_is_any_redirection(all, tCommand, i, pip->all_pipes);
+			tmp = check_is_any_redirection(all, tcmd, i, pip->all_pipes);
 			if (tmp == -1)
-				return (free(pip->all_pid), free_pipes(count_pipe(all), pip->all_pipes), 0);
+				return (free(pip->all_pid),
+					free_pipes(count_pipe(all), pip->all_pipes), 0);
 			if (is_other_pipe(i, pip->all_pipes, all, pip->all_pid) == 0)
-				return (free(pip->all_pid), free_pipes(count_pipe(all), pip->all_pipes), 0);
-			tmp = ft_terminal_command(tCommand[all->num_command - tmp], all);
+				return (free(pip->all_pid),
+					free_pipes(count_pipe(all), pip->all_pipes), 0);
+			tmp = ft_terminal_command(tcmd[all->num_command - tmp], all);
 			return (free_pipes(count_pipe(all), pip->all_pipes),
-					free(pip->all_pid), tmp);
+				free(pip->all_pid), tmp);
 		}
 		value_incremantation(all, &i);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:13:58 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 19:39:51 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:37:27 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	what_do(t_data *all)
 {
-	t_command	*tCommand;
+	t_command	*tcommand;
 
-	tCommand = all->command_line;
-	alpha_fork(all, tCommand);
+	tcommand = all->command_line;
+	alpha_fork(all, tcommand);
 }
 
-int		ft_strtablen(char **str)
+int	ft_strtablen(char **str)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ int		ft_strtablen(char **str)
 
 int	ft_free_dbchar_tab(char **str, int size)
 {
-	int i;
+	int	i;
 
 	i = size;
 	if (i == 0)
@@ -71,8 +71,8 @@ int	**creat_all_pipe(t_data *all)
 {
 	int	i;
 	int	**pipes;
-	i = 0;
 
+	i = 0;
 	pipes = malloc(sizeof(int *) * count_pipe(all));
 	if (!pipes)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:38:33 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/19 17:50:23 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:38:26 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_command	empty_command(void)
 	return (res);
 }
 
-void swap_first_param(t_data *data)
+void	swap_first_param(t_data *data)
 {
 	t_command	tmp;
 
@@ -104,7 +104,7 @@ void	need_creat_file(char *folder_name)
 	if (!access(folder_name, F_OK) == 0)
 	{
 		fd = open(folder_name, O_RDWR | O_CREAT, S_IRUSR
-			| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+				| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 		close(fd);
 	}
 }
@@ -124,7 +124,7 @@ int	make_command_line(int argc, char **argv, t_data *data)
 {
 	int	i;
 	int	j;
-	int yes;
+	int	yes;
 
 	i = 1;
 	j = 0;

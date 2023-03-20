@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:33:30 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 13:33:35 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:38:51 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(char *str1, char *str2)
+int	ft_strcmp(char *str1, char *str2)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str1[i] || str2[i])
+	while (str1[i] || str2[i])
 	{
 		if (str1[i] != str2[i])
 			return (0);

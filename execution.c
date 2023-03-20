@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-carv <gde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:16:19 by gde-carv          #+#    #+#             */
-/*   Updated: 2023/03/17 19:37:01 by gde-carv         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:35:19 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	go_last_input_redirect(int *i, t_data *all)
 {
 	while (all->instructions[all->num_of_opperation + 1]
-		   && (ft_strcmp(all->instructions[all->num_of_opperation + 1], "<")
-			   || ft_strcmp(all->instructions[all->num_of_opperation + 1], "<<")))
+		&& (ft_strcmp(all->instructions[all->num_of_opperation + 1], "<")
+			|| ft_strcmp(all->instructions[all->num_of_opperation + 1], "<<")))
 	{
 		if (ft_strcmp(all->instructions[all->num_of_opperation], "<<"))
 		{
@@ -46,7 +46,7 @@ static int	is_redirection_after(t_data *all, t_command *tCommand, int *j)
 
 static int	what_input_redirect(t_data *all, t_command *tCommand, int j)
 {
-	int fd;
+	int	fd;
 
 	if (ft_strcmp(all->instructions[all->num_of_opperation - j], "<"))
 	{
@@ -57,7 +57,7 @@ static int	what_input_redirect(t_data *all, t_command *tCommand, int j)
 	}
 	else
 	{
-		if (dup2(all->fd_heredoc[all->nb_user_input_redirection], 0)  == -1)
+		if (dup2(all->fd_heredoc[all->nb_user_input_redirection], 0) == -1)
 			return (0);
 		close(all->fd_heredoc[all->nb_user_input_redirection]);
 	}
@@ -85,21 +85,22 @@ int	is_redirection_after_pipe(t_data *all, t_command *tCommand, int *i)
 	return (1);
 }
 
-int have_input_redirection(t_data *all, t_command *tCommand, int *i)
+int	have_input_redirection(t_data *all, t_command *tCommand, int *i)
 {
-	int j;
+	int	j;
 
 	j = 0;
-	if (all->instructions[all->num_of_opperation] &&
-		(ft_strcmp(all->instructions[all->num_of_opperation], "<") ||
-		 ft_strcmp(all->instructions[all->num_of_opperation], "<<")))
+	if (all->instructions[all->num_of_opperation]
+		&& (ft_strcmp(all->instructions[all->num_of_opperation], "<")
+			|| ft_strcmp(all->instructions[all->num_of_opperation], "<<")))
 	{
 		go_last_input_redirect(i, all);
 		if (is_redirection_after(all, tCommand, &j) == 0)
 			return (0);
 		if (what_input_redirect(all, tCommand, j) == 0)
 			return (0);
-		all->error_value = ft_terminal_command(tCommand[all->num_command - (*i) - j], all);
+		all->error_value
+			= ft_terminal_command(tCommand[all->num_command - (*i) - j], all);
 		return (0);
 	}
 	return (1);
