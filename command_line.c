@@ -77,8 +77,9 @@ int	make_command_line(int argc, char **argv, t_data *data)
 
 	i = 1;
 	j = 0;
-	yes = 0;
 	data->command_line = malloc(sizeof(t_command) * (argc));
+	if (!data->command_line)
+		return (0);
 	while (i < argc)
 	{
 		if (i == 1 || i == argc - 1)
@@ -86,6 +87,8 @@ int	make_command_line(int argc, char **argv, t_data *data)
 		else
 			yes = 0;
 		data->command_line[j++] = make_command(argv[i++], data, yes);
+		if (!data->command_line[j - 1].path && !data->command_line[j - 1].command)
+			return (0);
 	}
 	j--;
 	need_creat_file(data->command_line[j].path);

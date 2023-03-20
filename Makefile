@@ -20,7 +20,7 @@ RM			=	rm -f
 all:			${NAME}
 
 ${NAME}:		${OBJS}
-				${CC} ${CFLAGS} -o ${NAME} ${OBJS} -I/usr/local/include -lreadline
+				${CC} ${CFLAGS} -o ${NAME} ${OBJS}
 
 clean:
 				rm -f $(OBJS)

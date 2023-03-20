@@ -6,7 +6,7 @@
 /*   By: etanguy <etanguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 11:31:59 by etanguy           #+#    #+#             */
-/*   Updated: 2023/03/20 11:37:46 by etanguy          ###   ########.fr       */
+/*   Updated: 2023/03/20 14:40:42 by etanguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_permission_access(char *folder_name, int is_output)
 			write(2, "Is a directory\n", 15);
 	}
 	else
-		write(2, " No such file or directory\n", 26);
+		write(2, "No such file or directory\n", 26);
 	return (0);
 }
 

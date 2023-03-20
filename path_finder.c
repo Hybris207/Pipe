@@ -19,9 +19,12 @@ char	*path_value(char **env)
 	char	*path;
 
 	i = 0;
-	while (ft_strncmp(env[i], "PATH", 4) != 0)
+	while (env && env[i] && ft_strncmp(env[i], "PATH", 4) != 0)
 		i++;
-	path = ft_strdup(env[i] + 5);
+	if (!env[i])
+		path = NULL;
+	else
+		path = ft_strdup(env[i] + 5);
 	return (path);
 }
 

@@ -18,13 +18,21 @@ int	make_instruction_line(int argc, t_data *data)
 
 	i = 1;
 	data->instructions = malloc(sizeof(char *) * argc - 1);
+	if (!data->instructions)
+		return (0);
 	data->instructions[0] = ft_strdup("<");
+	if (!data->instructions[0])
+		return (0);
 	while (i < argc - 3)
 	{
 		data->instructions[i] = ft_strdup("|");
+		if (!data->instructions[i])
+			return (0);
 		i++;
 	}
 	data->instructions[i] = ft_strdup(">");
+	if (!data->instructions[i])
+		return (0);
 	data->instructions[i + 1] = NULL;
 	return (1);
 }

@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **env)
 	t_data	data;
 
 	setup(&data);
-	if (argc < 5)
+	if (argc != 5)
 		return (ft_putstr_fd("Invalid Arguments\n", 2), 1);
 	if (!parcing(argc, argv, env, &data))
 		return (free_all(&data, argc), 1);
